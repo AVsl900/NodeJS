@@ -1,3 +1,10 @@
+/*  !!!!!!!!!!!!!!!!!!!!!!
+Для запуска и обновления установить, если не установлен
+npm install -g nodemon
+и потом запускать с ком. строки
+nodemon app.js
+*/
+
 const express = require('express')
 const app = express()
 app.set('view engine', 'ejs')
@@ -8,4 +15,3 @@ app.get('/', function (req, res) {
    })
     
    app.listen(3000)
-   

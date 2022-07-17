@@ -16,5 +16,4 @@
       "express-session": "1.17.0",
       "sqlite3": "4.1.0"
     }
-   }
-   
+   }   
