@@ -126,6 +126,29 @@ app.post('/new_post', function (req, res) {
    app.get('/register', function (req, res) {
     res.render('register', {activePage: "register"})
    })
+   app.post('/register', function (req, res) {
+    bcrypt.hash(req.body.password, 10, function(err, hash) {
+      var data = [
+        req.body.name,
+        req.body.email,
+        hash
+      ]
+
+      var sql = "INSERT INTO users (name, email, password) VALUES (?,?,?)"
+      db.run(sql, data, function (err, result) {
+        if (err) {
+          res.status(400)
+          res.send("database error:" + err.message)
+          return;
+        }
+        res.render('register_answer', {activePage: "register", formData: req.body})
+      });
+    });
+   })
+   
+   app.get('/register', function (req, res) {
+    res.render('register', {activePage: "register"})
+   })
    
    
    app.listen(3000)
