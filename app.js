@@ -8,6 +8,8 @@ http://localhost:3000/
 
 const express = require('express')
 const app = express()
+const db = require("./database.js")
+
 app.set('view engine', 'ejs')
 app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist'))
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'))
