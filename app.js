@@ -9,6 +9,7 @@ http://localhost:3000/
 const express = require('express')
 const app = express()
 const db = require("./database.js")
+const bcrypt = require('bcrypt')
 
 app.set('view engine', 'ejs')
 app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist'))
@@ -121,5 +122,10 @@ app.post('/new_post', function (req, res) {
       res.render('show_post', {post: row, activePage: "posts"})
     });
    })
+
+   app.get('/register', function (req, res) {
+    res.render('register', {activePage: "register"})
+   })
+   
    
    app.listen(3000)
