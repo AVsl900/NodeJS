@@ -3,6 +3,7 @@
 npm install -g nodemon
 и потом запускать с ком. строки
 nodemon app.js
+http://localhost:3000/
 */
 
 const express = require('express')
