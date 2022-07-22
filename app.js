@@ -109,6 +109,17 @@ app.post('/new_post', function (req, res) {
     });
    })
    
-    
+   app.get('/posts/:id/show', function (req, res) {
+    var sql = "SELECT * FROM posts WHERE id = ?"
+    var params = [req.params.id]
+    db.get(sql, params, (err, row) => {
+      if (err) {
+        res.status(400)
+        res.send("database error:" + err.message)
+        return;
+      }
+      res.render('show_post', {post: row, activePage: "posts"})
+    });
+   })
    
    app.listen(3000)
