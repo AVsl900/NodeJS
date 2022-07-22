@@ -1,3 +1,19 @@
+<!doctype html>
+<html lang="en">
+ <head>
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <%- include("partials/navbar.ejs") %>
+    <div class="jumbotron">
+
 <form method="post" action="/posts/<%- post['id'] %>/edit">
     <div class="form-group">
         <label for="name">Title</label>
@@ -13,3 +29,10 @@
     </div>
     <button type="submit" class="btn btn-primary">Update Post</button>
   </form>
+</div> 
+</div>
+<!-- JavaScript -->
+<script src="/jquery/jquery.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
