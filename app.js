@@ -26,7 +26,18 @@ app.get('/contact', function (req, res) {
 app.post('/contact', function (req, res) {
     res.render('contact_answer', {activePage: "contact", formData: req.body})
 })
-
+app.get('/posts', function (req, res) {
+    var sql = "SELECT * FROM posts"
+    db.all(sql, [], (err, rows) => {
+        if (err) {
+          res.status(400)
+          res.send("database error:" + err.message)
+          return;
+        }
+        res.render('posts', {activePage: "posts", posts: rows})
+      });
+     })
+        
     
    
    app.listen(3000)
