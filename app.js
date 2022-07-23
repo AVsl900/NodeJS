@@ -150,5 +150,8 @@ app.post('/new_post', function (req, res) {
     res.render('register', {activePage: "register"})
    })
    
+   app.get('/login', function (req, res) {
+    res.render('login', {activePage: "login", error: ""})
+   })
    
    app.listen(3000)
