@@ -26,10 +26,26 @@ app.use(express.urlencoded())
 app.get('/', function (req, res) {
     res.render('index', {activePage: "home"}) 
 }) 
-app.get('/contact', function (req, res) {
-        res.render('contact', {activePage: "contact"})
+app.get('/contact(s)?', function (req, res) {//адрес contact и contacts
+    res.render('contact', {activePage: "contact"})
 })
-       
+//test
+        app.get('/about', function (req, res) {
+          res.send("<h1>Это мы, опилки</h1>" );
+          console.log("</br> pronjkol + Url:  " + req.protocol + " " + req.url + " " + req.ip) ;
+
+        })
+        app.get('/about/:id1/:id2', function (req, res) {
+          //res.send("Это мы, опилки " +req.params.id1+ " и " +req.params.id2 );
+          res.sendFile(__dirname + '/views/test.html');
+        })
+    /*    app.use(function(req, res) {
+          res.status(404).send('not found');
+        }); 
+    */
+ //test
+
+      
 app.post('/contact', function (req, res) {
     res.render('contact_answer', {activePage: "contact", formData: req.body})
 })
@@ -226,4 +242,6 @@ app.post('/new_post', function (req, res) {
    }
    
 
-   app.listen(3000)
+   app.listen(3000, function() {
+    console.log('running on http://localhost:3000/');
+  });
