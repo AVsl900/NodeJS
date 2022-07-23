@@ -206,6 +206,24 @@ app.post('/new_post', function (req, res) {
    }
     
  
-      
+   app.get('/logout', function (req, res) {
+    req.session.userId = null
+    req.session.loggedIn = false
+    res.redirect("/login")
+   })
+   
+   app.get('/profile', checkAuth, function (req, res) {
+    res.render('profile', {activePage: "profile"})
+   })
+
+   
+   function checkAuth(req, res, next) {
+    if (req.session.loggedIn) {
+      return next()
+    } else {
+      res.redirect('/login')
+    }
+   }
+   
 
    app.listen(3000)
