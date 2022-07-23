@@ -1,5 +1,29 @@
+<!doctype html>
+<html lang="en">
+ <head>
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <%- include("partials/navbar.ejs") %>
+    <div class="jumbotron">
+
 <div class="alert alert-success" role="alert">
     Thank you for registration, <%- formData.name %>!
 </div>
 You can now
 <a href="/login">Login</a>
+
+</div> 
+</div>
+<!-- JavaScript -->
+<script src="/jquery/jquery.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

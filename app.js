@@ -10,6 +10,11 @@ const express = require('express')
 const app = express()
 const db = require("./database.js")
 const bcrypt = require('bcrypt')
+const session = require('express-session')
+app.use(session({
+ secret: 'randomly generated secret',
+}))
+
 
 app.set('view engine', 'ejs')
 app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist'))
@@ -154,4 +159,35 @@ app.post('/new_post', function (req, res) {
     res.render('login', {activePage: "login", error: ""})
    })
    
+   app.post('/login', function (req, res) {
+    var sql = "SELECT * FROM users WHERE email = ?"
+    var params = [req.body.email]
+    var error = ""
+    db.get(sql, params, (err, row) => {
+      if (err) {
+        error = err.message
+      }
+      if (row === undefined) {
+        error = "Wrong email or password"
+      }
+      if (error !== "") {
+        res.render('login', {activePage: "login", error: error})
+        return
+      }
+      bcrypt.compare(req.body.password, row["password"], function(err, hashRes) {
+        if (hashRes === false) {
+          error = "Wrong email or password"
+          res.render('login', {activePage: "login", error: error})
+          return
+        }
+        req.session.userId = row["id"]
+        req.session.loggedIn = true
+        res.redirect("/")
+      });
+   
+    })
+   })
+   
+
+
    app.listen(3000)
