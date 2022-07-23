@@ -14,6 +14,7 @@ const session = require('express-session')
 app.use(session({
  secret: 'randomly generated secret',
 }))
+app.use(setCurrentUser) //имеет значение место вызова, в конце - не работает
 
 
 app.set('view engine', 'ejs')
@@ -188,6 +189,23 @@ app.post('/new_post', function (req, res) {
     })
    })
    
-
+   function setCurrentUser(req, res, next) {
+    //console.log("setCurrentUser");
+    if (req.session.loggedIn) {
+      var sql = "SELECT * FROM users WHERE id = ?"
+      var params = [req.session.userId]
+      db.get(sql, params, (err, row) => {
+        if (row !== undefined) {
+          res.locals.currentUser = row
+        }
+        return next()
+      });
+    } else {
+      return next()
+    }
+   }
+    
+ 
+      
 
    app.listen(3000)
