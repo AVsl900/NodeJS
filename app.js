@@ -9,7 +9,6 @@ http://localhost:3000/
 const express = require('express')
 const app = express()
 const db = require("./database.js")
-const db2 = require("./database2.js")
 const bcrypt = require('bcrypt')
 
 app.set('view engine', 'ejs')
@@ -136,7 +135,7 @@ app.post('/new_post', function (req, res) {
         hash
       ]
       var sql = "INSERT INTO users (name, email, password) VALUES (?,?,?)"
-      db2.run(sql, data, function (err, result) {
+      db.run(sql, data, function (err, result) {
         if (err) {
           res.status(400)
           res.send("database error:" + err.message)
