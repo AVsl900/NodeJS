@@ -11,11 +11,16 @@ const app = express()
 const db = require("./database.js")
 const bcrypt = require('bcrypt')
 const session = require('express-session')
+//var sort_funcs = require("./sort_funcs.js"); //подключаем из файла
+let sort;
+//
+
+
 app.use(session({
  secret: 'randomly generated secret',
 }))
 app.use(setCurrentUser) //имеет значение место вызова, в конце - не работает
-
+//app.use(typeSort)
 
 app.set('view engine', 'ejs')
 app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist'))
@@ -23,7 +28,11 @@ app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'))
 
 app.use(express.urlencoded())
 
+
+
 app.get('/', function (req, res) {
+  //console.log(res);
+  console.log(req.query);
     res.render('index', {activePage: "home"}) 
 }) 
 app.get('/contact(s)?', function (req, res) {//адрес contact и contacts
@@ -50,6 +59,7 @@ app.post('/contact', function (req, res) {
     res.render('contact_answer', {activePage: "contact", formData: req.body})
 })
 app.get('/posts', function (req, res) {
+    //sort = req.query.sort;
     var sql = "SELECT * FROM posts"
     db.all(sql, [], (err, rows) => {
         if (err) {
@@ -57,9 +67,16 @@ app.get('/posts', function (req, res) {
           res.send("database error:" + err.message)
           return;
         }
-        res.render('posts', {activePage: "posts", posts: rows})
+        //sort = req.query.sort;
+        res.render('posts',  {activePage: "posts", posts: rows, sort:req.query.sort })
       });
+     //sort = req.query.sort;
+     //res.render('sort');
      })
+
+  app.use('/posts', function (req, res) {
+      res.render('sort');
+    })
 
 app.get('/new_post', function (req, res) {
     res.render('new_post', {activePage: "new_post"})
@@ -220,7 +237,8 @@ app.post('/new_post', function (req, res) {
       return next()
     }
    }
-    
+
+   //function typeSort(sort){ return sort;}
  
    app.get('/logout', function (req, res) {
     req.session.userId = null
@@ -235,9 +253,9 @@ app.post('/new_post', function (req, res) {
    
    function checkAuth(req, res, next) {
     if (req.session.loggedIn) {
-      return next()
+      return next();
     } else {
-      res.redirect('/login')
+      res.redirect('/login');
     }
    }
    

@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+  
  <head>
    <!-- Required meta tags -->
    <meta charset="utf-8">
@@ -28,6 +29,16 @@
             </tr>
           </thead>
           <tbody>
+            <% include("../sort_funcs.js");
+          
+               switch(sort){
+               case 1: compareA();
+               break;
+               case 2: compareD();
+               break;
+              }
+               %>             
+
           <% posts.forEach(function(post) { %>
             <tr>
               <td><%- post["id"] %></td>
@@ -43,6 +54,8 @@
           </tbody>
         </table>
         <a href="/new_post" class="btn btn-success">Create New Post</a>
+        <a class="btn btn-success">Sort by author</a>
+        <a class="btn btn-success">Sort by title</a>
    
      </div>
    </div>
