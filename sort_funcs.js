@@ -14,11 +14,11 @@ function compareT(a, b)
 
 function sortA(){
     flagSort = 'author';
-    console.log("flagSort= " + flagSort);
+    //console.log("flagSort= " + flagSort);
     } 
     function sortT(){
     flagSort = 'title';
-    console.log("flagSort= " + flagSort);
+    //console.log("flagSort= " + flagSort);
     }   
 
 module.exports.compareA = compareA;

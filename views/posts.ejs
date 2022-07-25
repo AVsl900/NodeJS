@@ -13,9 +13,7 @@
  </head>
  <body>
 
-    <% // let flagSort;
-      include("../sort_funcs.js"); 
-      %> 
+     
   
    <div class="container">
     <%- include("partials/navbar.ejs")%>
@@ -23,6 +21,21 @@
      <div class="jumbotron jumbotron-fluid">
 
         <h1 style="text-align:center">Posts</h1>
+        
+        <script>   
+          let flagSort;
+          function sortA(){
+          flagSort = 'author';
+          console.log("flagSort= " + flagSort);
+          } 
+          function sortT(){
+          flagSort = 'title';
+          console.log("flagSort= " + flagSort);
+          } 
+          </script>
+
+        <% //let flagSort; %>    
+        <% // include("../sort_funcs.js"); //файл находит, sortA - нет %>
         
 
         <table class="table table-striped">
@@ -61,7 +74,7 @@
         <a href="/new_post" class="btn btn-success btn-sm">Create New Post</a>
         <a class="btn btn-info btn-sm", onclick = "sortA()">Sort by author</a>
         <a class="btn btn-info btn-sm", onclick = "sortT()">Sort by title</a>
-        <% //console.log("flagSort= " + flagSort);%>
+        
         <p>Total count: <%- posts.length %></p>
    
      </div>
