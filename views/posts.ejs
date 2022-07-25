@@ -17,13 +17,12 @@
 
 
 
-  <% 
-      include("../sort_funcs.js");
-      
+  <%  let flagSort;
+      include("../sort_funcs.js"); 
       %> 
   
    <div class="container">
-    <%- include("partials/navbar.ejs") %>
+    <%- include("partials/navbar.ejs")%>
     
      <div class="jumbotron">
         <h1>Posts</h1>
@@ -31,15 +30,8 @@
 
                         
         <script>   
-        let flagSort;
-        function sortA(){
-        flagSort = 'author';
-        console.log("flagSort= " + flagSort);
-        } 
-        function sortT(){
-        flagSort = 'title';
-        console.log("flagSort= " + flagSort);
-        }   
+        //let flagSort;
+       
         </script>
 
         <table class="table table-striped">
