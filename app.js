@@ -66,9 +66,9 @@ app.get('/posts', function (req, res) {
       });
      })
 
-  app.use('/posts', function (req, res) {
-      res.render('sort');
-    })
+  //app.use('/posts', function (req, res) {
+  //    res.render('sort');
+  //  })
 
 app.get('/new_post', function (req, res) {
     res.render('new_post', {activePage: "new_post"})

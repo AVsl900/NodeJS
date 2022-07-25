@@ -5,13 +5,24 @@ function compareA(a, b)
     return 1;
 }
 
-function compareD(a, b)
+function compareT(a, b)
 {
-    if (a.data > b.data)
+    if (a.title > b.title)
         return -1;
     return 1;
 }
 
+function sortA(){
+    flagSort = 'author';
+    console.log("flagSort= " + flagSort);
+    } 
+    function sortT(){
+    flagSort = 'title';
+    console.log("flagSort= " + flagSort);
+    }   
 
 module.exports.compareA = compareA;
-module.exports.compareD = compareD ;
+module.exports.compareT = compareT;
+module.exports.sortA = sortA;
+module.exports.sortA = sortA;
+module.exports.sortT = sortT;
