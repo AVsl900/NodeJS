@@ -13,12 +13,35 @@
  </head>
  <body>
 
+  
+
+
+
+  <% 
+      include("../sort_funcs.js");
+      
+      %> 
+  
    <div class="container">
     <%- include("partials/navbar.ejs") %>
     
      <div class="jumbotron">
         <h1>Posts</h1>
         <p>Total count: <%- posts.length %></p>
+
+                        
+        <script>   
+        let flagSort;
+        function sortA(){
+        flagSort = 'author';
+        console.log("flagSort= " + flagSort);
+        } 
+        function sortT(){
+        flagSort = 'title';
+        console.log("flagSort= " + flagSort);
+        }   
+        </script>
+
         <table class="table table-striped">
           <thead class="thead-dark">
             <tr>
@@ -29,33 +52,27 @@
             </tr>
           </thead>
           <tbody>
-            <% include("../sort_funcs.js");
-          
-               switch(sort){
-               case 1: compareA();
-               break;
-               case 2: compareD();
-               break;
-              }
-               %>             
+                        
 
-          <% posts.forEach(function(post) { %>
+          <% 
+          posts.forEach(function(post) { %>
             <tr>
               <td><%- post["id"] %></td>
               <td><%- post["title"] %></td>
               <td><%- post["author"] %></td>
               <td>
-                <a href="/posts/<%- post['id'] %>/show" class="btn btn-primary">Show</a>
-                <a href="/posts/<%- post['id'] %>/edit" class="btn btn-success">Edit</a>
-                <a href="/posts/<%- post['id'] %>/delete" class="btn btn-danger">Delete</a>
+                <a href="/posts/<%- post['id'] %>/show" class="btn btn-primary btn-sm">Show</a>
+                <a href="/posts/<%- post['id'] %>/edit" class="btn btn-success btn-sm">Edit</a>
+                <a href="/posts/<%- post['id'] %>/delete" class="btn btn-danger btn-sm">Delete</a>
               </td>
             </tr>
           <% }) %>
           </tbody>
         </table>
-        <a href="/new_post" class="btn btn-success">Create New Post</a>
-        <a class="btn btn-success">Sort by author</a>
-        <a class="btn btn-success">Sort by title</a>
+        <a href="/new_post" class="btn btn-success btn-sm">Create New Post</a>
+        <a class="btn btn-info btn-sm", onclick = "sortA()">Sort by author</a>
+        <a class="btn btn-info btn-sm", onclick = "sortT()">Sort by title</a>
+
    
      </div>
    </div>

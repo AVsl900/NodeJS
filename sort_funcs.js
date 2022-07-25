@@ -12,5 +12,6 @@ function compareD(a, b)
     return 1;
 }
 
+
 module.exports.compareA = compareA;
 module.exports.compareD = compareD ;

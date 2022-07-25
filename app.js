@@ -11,10 +11,6 @@ const app = express()
 const db = require("./database.js")
 const bcrypt = require('bcrypt')
 const session = require('express-session')
-//var sort_funcs = require("./sort_funcs.js"); //подключаем из файла
-let sort;
-//
-
 
 app.use(session({
  secret: 'randomly generated secret',
@@ -32,7 +28,7 @@ app.use(express.urlencoded())
 
 app.get('/', function (req, res) {
   //console.log(res);
-  console.log(req.query);
+  //console.log(req.query);
     res.render('index', {activePage: "home"}) 
 }) 
 app.get('/contact(s)?', function (req, res) {//адрес contact и contacts
@@ -59,7 +55,6 @@ app.post('/contact', function (req, res) {
     res.render('contact_answer', {activePage: "contact", formData: req.body})
 })
 app.get('/posts', function (req, res) {
-    //sort = req.query.sort;
     var sql = "SELECT * FROM posts"
     db.all(sql, [], (err, rows) => {
         if (err) {
@@ -67,11 +62,8 @@ app.get('/posts', function (req, res) {
           res.send("database error:" + err.message)
           return;
         }
-        //sort = req.query.sort;
-        res.render('posts',  {activePage: "posts", posts: rows, sort:req.query.sort })
+        res.render('posts',  {activePage: "posts", posts: rows /*, sort:req.query.sort*/ })
       });
-     //sort = req.query.sort;
-     //res.render('sort');
      })
 
   app.use('/posts', function (req, res) {
