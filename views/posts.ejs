@@ -48,16 +48,24 @@
             </tr>
           </thead>
           <tbody>
-                        
+          
+  
+<% 
+
+          //console.log(postCopy) ;
+%>
+
 
           <% 
-          let postCopy = [];
-          let i = 0;                 
+          let postCopy = [
+            [],
+            [],
+            [] ];
+          var i = 0;                 
           posts.forEach(function(post) {
-              postCopy[i++] = post["id"];
-              postCopy[i++] = post["title"];
-              postCopy[i++] = post["author"]; 
-               
+              postCopy[0][i] = post["id"];
+              postCopy[1][i] = post["title"];
+              postCopy[2][i++] = post["author"]; 
             %>
             <tr>
               <td><%- post["id"] %></td>
