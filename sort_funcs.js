@@ -24,5 +24,4 @@ function sortA(){
 module.exports.compareA = compareA;
 module.exports.compareT = compareT;
 module.exports.sortA = sortA;
-module.exports.sortA = sortA;
 module.exports.sortT = sortT;

@@ -13,26 +13,17 @@
  </head>
  <body>
 
-  
-
-
-
-  <%  let flagSort;
+    <% // let flagSort;
       include("../sort_funcs.js"); 
       %> 
   
    <div class="container">
     <%- include("partials/navbar.ejs")%>
     
-     <div class="jumbotron">
-        <h1>Posts</h1>
-        <p>Total count: <%- posts.length %></p>
+     <div class="jumbotron jumbotron-fluid">
 
-                        
-        <script>   
-        //let flagSort;
-       
-        </script>
+        <h1 style="text-align:center">Posts</h1>
+        
 
         <table class="table table-striped">
           <thead class="thead-dark">
@@ -47,7 +38,13 @@
                         
 
           <% 
-          posts.forEach(function(post) { %>
+         // let postCopy = {};                 
+          posts.forEach(function(post) {
+            //let i = 0;
+            //  postCopy[i++] = post["id"];
+            //  postCopy[i++] = post["title"];
+             // postCopy[i++] = post["author"];       
+            %>
             <tr>
               <td><%- post["id"] %></td>
               <td><%- post["title"] %></td>
@@ -64,7 +61,8 @@
         <a href="/new_post" class="btn btn-success btn-sm">Create New Post</a>
         <a class="btn btn-info btn-sm", onclick = "sortA()">Sort by author</a>
         <a class="btn btn-info btn-sm", onclick = "sortT()">Sort by title</a>
-
+        <% //console.log("flagSort= " + flagSort);%>
+        <p>Total count: <%- posts.length %></p>
    
      </div>
    </div>
