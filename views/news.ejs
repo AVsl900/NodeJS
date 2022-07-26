@@ -1,27 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="wight=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Новости</title>
-	<style>
-		body {background-color:#98bfd5;}
-		.block {text-align: center; width: 70%; margin-left: 15%}
-		h1 {color:#494949; font-size: 3.5em}
-		p {color:#494949; font-size: 1.2em;}
-	</style>
 </head>
 <body>
-	<div class="block">
+
 		<h1>Новостная страница c ID = <%= newsId %></h1>
         <ul>
             <% obj.paragraphs.forEach(function(item) { %>
             <li><%= item %></li>
         <% }); %>
         </ul>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque numquam libero, veniam ipsum similique odit molestiae esse quia blanditiis magni debitis aliquam, pariatur nam quaerat quas nemo, facilis temporibus laboriosam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores enim vitae dolore nemo quas aliquam quia corrupti rerum ipsam ad nesciunt, architecto, pariatur officiis. Maxime iste ullam quibusdam, nobis voluptas!</p>
-	</div>
+
 </body>
 </html>
 
