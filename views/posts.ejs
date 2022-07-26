@@ -22,20 +22,20 @@
 
         <h1 style="text-align:center">Posts</h1>
         
-        <%  
+      <%/*
           let flagSort= 'author';
           function sortA(){
-          flagSort = 'author';
-          console.log("flagSort= " + flagSort);
+            flagSort = 'author';
+            console.log("xxx" + flagSort);
           } 
           function sortT(){
-          flagSort = 'title';
-          console.log("flagSort= " + flagSort);
+            flagSort = 'title';
+            console.log("xxx" +flagSort);
           } 
-          %>
+        */
+        %>
 
-        <% //let flagSort; %>    
-        <%  //include("../sort_funcs.js");  %>
+        <%  include("../sort_funcs.js");  %>
         
 
         <table class="table table-striped">
@@ -83,24 +83,34 @@
               {return 1; }
             return 0;
           }
-          console.log(postCopy) ;
-          if (flagSort== 'author')
-            postCopy.sort( compareA );
-          else if (flagSort== 'title')
-            postCopy.sort( compareT );
-          console.log(postCopy) ;
-          console.log(flagSort);
+          //console.log(postCopy) ;
+          //if (flagSort== 'author')
+          //  postCopy.sort( compareA );
+          //else if (flagSort== 'title')
+          //  postCopy.sort( compareT );
+          //console.log(postCopy) ;
+          //console.log(flagSort);
           %>
           </tbody>
         </table>
         <a href="/new_post" class="btn btn-success btn-sm">Create New Post</a>
-        <a class="btn btn-info btn-sm", onclick = "sortA()">Sort by author</a>
-        <a class="btn btn-info btn-sm", onclick = "sortT()">Sort by title</a>
-        
+
+        <a href="posts/1" class="btn btn-success btn-sm">Sort by author</a>
+        <a href="posts/2" class="btn btn-success btn-sm">Sort by title</a>
+
+        <!--
+        <a class="btn btn-info btn-sm", onclick= () sortA> Sort by author</a>
+        <a class="btn btn-info btn-sm", onclick =  sortT() > Sort by title</a>
+        -->
         <p>Total count: <%- posts.length %></p>
+       
+
    
      </div>
    </div>
+
+   
+
 
    <!-- JavaScript -->
    <script src="/jquery/jquery.min.js"></script>

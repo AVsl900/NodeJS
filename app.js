@@ -41,7 +41,7 @@ app.get('/contact(s)?', function (req, res) {//адрес contact и contacts
 
         })
         app.get('/about/:id1/:id2', function (req, res) {
-          //res.send("Это мы, опилки " +req.params.id1+ " и " +req.params.id2 );
+          res.send("Это мы, опилки " +req.params.id1+ " и " +req.params.id2 );
           res.sendFile(__dirname + '/views/test.html');
         })
     /*    app.use(function(req, res) {
@@ -62,7 +62,7 @@ app.get('/posts', function (req, res) {
           res.send("database error:" + err.message)
           return;
         }
-        res.render('posts',  {activePage: "posts", posts: rows /*, sort:req.query.sort*/ })
+        res.render('posts',  {activePage: "posts", posts: rows,  /*, sort:req.query.sort*/ })
       });
      })
 
@@ -251,6 +251,18 @@ app.post('/new_post', function (req, res) {
     }
    }
    
+   /*
+   app.get('/posts/:sort', function (req, res) {
+    let flagSort = req.params.sort;
+    let obj = { title:'Новость', id: 4};
+    res.render('posts', {activePage: "posts", obj: obj} ) 
+    //res.redirect('/posts');
+    })*/
+
+    app.get('/news/:id', function(req, res){
+      let obj = { title:'Новость', id: 4, paragraphs:['Параграф', 'Обычный текст', 'Числа: 3, 7, 24', 476]};
+      res.render('news', {newsId: req.params.id, newParam: 535, obj: obj});
+    });
 
    app.listen(3000, function() {
     console.log('running on http://localhost:3000/');
