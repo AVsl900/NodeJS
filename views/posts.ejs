@@ -84,27 +84,28 @@
             return 0;
           }
           //console.log(postCopy) ;
-          //if (flagSort== 'author')
-          //  postCopy.sort( compareA );
-          //else if (flagSort== 'title')
-          //  postCopy.sort( compareT );
-          //console.log(postCopy) ;
+          if (flagSort== 'author')
+            postCopy.sort( compareA );
+          else if (flagSort== 'title')
+            postCopy.sort( compareT );
+          console.log(postCopy) ;
           //console.log(flagSort);
           %>
           </tbody>
         </table>
         <a href="/new_post" class="btn btn-success btn-sm">Create New Post</a>
 
-        <a href="posts/1" class="btn btn-success btn-sm">Sort by author</a>
-        <a href="posts/2" class="btn btn-success btn-sm">Sort by title</a>
+        <a href="author" class="btn btn-success btn-sm">Sort by author</a>
+        <a href="title" class="btn btn-success btn-sm">Sort by title</a>
 
-        <!--
-        <a class="btn btn-info btn-sm", onclick= () sortA> Sort by author</a>
-        <a class="btn btn-info btn-sm", onclick =  sortT() > Sort by title</a>
-        -->
         <p>Total count: <%- posts.length %></p>
        
-
+        <ul>
+          <% //obj.paragraphs.forEach(function(item) { %>
+          <li><%= //item %></li>
+        <%// }); %>
+        </ul>
+  
    
      </div>
    </div>
