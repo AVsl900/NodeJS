@@ -1,3 +1,4 @@
+/*
 function compareA(a, b)
 {
     if (a.author > b.author)
@@ -25,3 +26,4 @@ module.exports.compareA = compareA;
 module.exports.compareT = compareT;
 module.exports.sortA = sortA;
 module.exports.sortT = sortT;
+*/
