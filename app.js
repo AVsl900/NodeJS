@@ -32,7 +32,9 @@ app.get('/', function (req, res) {
     res.render('index', {activePage: "home"}) 
 }) 
 app.get('/contact(s)?', function (req, res) {//адрес contact и contacts
-    res.render('contact', {activePage: "contact"})
+  let obj = { title:'Новость', id: 4, paragraphs:['Параграф', 'Обычный текст', 'Числа: 3, 7, 24', 476]};
+  res.render('contact', {activePage: "contact", newsId: req.params.id, newParam: 535, obj: obj});
+
 })
 //test
         app.get('/about', function (req, res) {
