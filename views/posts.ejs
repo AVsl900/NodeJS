@@ -22,8 +22,8 @@
 
         <h1 style="text-align:center">Posts</h1>
         
-        <script>   
-          let flagSort;
+        <%  
+          let flagSort= 'author';
           function sortA(){
           flagSort = 'author';
           console.log("flagSort= " + flagSort);
@@ -32,9 +32,7 @@
           flagSort = 'title';
           console.log("flagSort= " + flagSort);
           } 
-
-          
-          </script>
+          %>
 
         <% //let flagSort; %>    
         <%  //include("../sort_funcs.js");  %>
@@ -68,6 +66,7 @@
               </td>
             </tr>
           <% })
+
           function compareT(a, b)
           {
           if (a.title < b.title)
@@ -85,8 +84,12 @@
             return 0;
           }
           console.log(postCopy) ;
-          postCopy.sort( compareA );
+          if (flagSort== 'author')
+            postCopy.sort( compareA );
+          else if (flagSort== 'title')
+            postCopy.sort( compareT );
           console.log(postCopy) ;
+          console.log(flagSort);
           %>
           </tbody>
         </table>
