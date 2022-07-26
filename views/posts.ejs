@@ -32,10 +32,12 @@
           flagSort = 'title';
           console.log("flagSort= " + flagSort);
           } 
+
+          
           </script>
 
         <% //let flagSort; %>    
-        <% // include("../sort_funcs.js"); //файл находит, sortA - нет %>
+        <%  //include("../sort_funcs.js");  %>
         
 
         <table class="table table-striped">
@@ -48,24 +50,12 @@
             </tr>
           </thead>
           <tbody>
-          
-  
-<% 
-
-          //console.log(postCopy) ;
-%>
-
-
+        
           <% 
-          let postCopy = [
-            [],
-            [],
-            [] ];
-          var i = 0;                 
+          let postCopy = [];
+              
           posts.forEach(function(post) {
-              postCopy[0][i] = post["id"];
-              postCopy[1][i] = post["title"];
-              postCopy[2][i++] = post["author"]; 
+            postCopy.push ({ id: post["id"], title: post["title"], author: post["author"] }) ;
             %>
             <tr>
               <td><%- post["id"] %></td>
@@ -78,6 +68,24 @@
               </td>
             </tr>
           <% })
+          function compareT(a, b)
+          {
+          if (a.title < b.title)
+            return -1;
+          if (a.title > b.title)
+          return 1;
+          }
+
+          function compareA(a, b)
+          {
+            if (a.author < b.author)
+              {return -1;}
+            if (a.author > b.author)
+              {return 1; }
+            return 0;
+          }
+          console.log(postCopy) ;
+          postCopy.sort( compareA );
           console.log(postCopy) ;
           %>
           </tbody>
