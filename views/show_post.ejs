@@ -11,24 +11,42 @@
 </head>
 <body>
 
+  <style>
+    #a1 {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+    }
+  </style>
+
 <div class="container">
     <%- include("partials/navbar.ejs") %>
     <div class="jumbotron">
 
     <form method="post" action="/posts/<%- post['id'] %>/show">
+<!-- <div id="a1"> -->
+      <label for="name" >Тема: <%- post['title'] %></label> 
+      <br/>
+      <label for="text">Author: <%- post['author'] %> </label>
+ <!-- </div> -->
     <div class="form-group">
-        <label for="name">Title</label>
-        <input type="text" readonly name="title" class="form-control" id="title" placeholder="Css 3" value="<%- post['title'] %>" required>
+        <label for="message"></label>
+        <textarea readonly name="body" class="form-control" id="body" rows="3" required><%- post['body'] %></textarea>
     </div>
+  </form>
+
+    <h3>Comments</h3>  
     <div class="form-group">
       <label for="name">Author</label>
-      <input type="text" readonly name="author" class="form-control" id="author" placeholder="John" value="<%- post['author'] %>" required>
+      <input type="text"  name="author" class="form-control" id="author" placeholder="John" required>
     </div>
     <div class="form-group">
         <label for="message">Body</label>
-        <textarea readonly name="body" class="form-control" id="body" rows="10" required><%- post['body'] %></textarea>
+        <textarea name="body" class="form-control" id="body" rows="5" required> </textarea>
     </div>
-  </form>
+
+
+  
 </div> 
 </div>
 <!-- JavaScript -->
