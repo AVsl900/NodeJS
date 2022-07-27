@@ -65,7 +65,7 @@ app.get('/posts', function (req, res) {
           res.send("database error:" + err.message)
           return;
         }
-        res.render('posts',  {activePage: "posts", posts: rows, flagSort: req.params.id /*, sort:req.query.sort*/ })
+        res.render('posts',  {activePage: "posts", posts: rows })
       });
      })
 
@@ -103,7 +103,7 @@ app.post('/new_post', function (req, res) {
         res.send("database error:" + err.message)
         return;
       }
-      res.render('edit_post', {post: row, activePage: "posts", flagSort: req.params.id})
+      res.render('edit_post', {post: row, activePage: "posts"})
     });
    })
 
@@ -153,7 +153,7 @@ app.post('/new_post', function (req, res) {
         res.send("database error:" + err.message)
         return;
       }
-      res.render('show_post', {post: row, activePage: "posts", flagSort: req.params.id})
+      res.render('show_post', {post: row, activePage: "posts"})
     });
    })
 
