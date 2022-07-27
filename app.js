@@ -214,12 +214,7 @@ app.post('/new_post', function (req, res) {
         }
         req.session.userId = row["id"]
         req.session.loggedIn = true
-        //req.session.userName = row["name"]
-        let Name = "/posts/" + row["name"];
-        //Author = row["name"];
-        //res.render('posts', {activePage: "posts", error: error, Author: Author})
-        //console.log(Name);
-        res.redirect(Name);
+        res.redirect("/posts");
       });
    
     })
