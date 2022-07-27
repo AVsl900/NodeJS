@@ -9,7 +9,7 @@
         <li class="nav-item <%- activePage == "home" ? "active" : "" %>">
           <a class="nav-link" href="/">Home</a>
         </li>
-      
+        <% 
         if (typeof currentUser !== "undefined") { %>
           <li class="nav-item <%- activePage == "profile" ? "active" : "" %>">
             <a class="nav-link" href="/profile">Profile</a>
