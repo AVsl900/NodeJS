@@ -25,9 +25,9 @@
 
     <form method="post" action="/posts/<%- post['id'] %>/show">
 <!-- <div id="a1"> -->
-      <label for="name" >Тема: <%- post['title'] %></label> 
-      <br/>
-      <label for="text">Author: <%- post['author'] %> </label>
+      <label for="name" ><%- post['title'] %>, </label> 
+
+      <label for="text"> <b>By <span style="color:red;font-weight:bold"><%- post['author'] %></span> </b></label>
  <!-- </div> -->
     <div class="form-group">
         <label for="message"></label>
@@ -36,11 +36,11 @@
   </form>
 
     <h3>Comments</h3> 
-    <label for="text">Author: <%- post['author'] %> ,  </label>
-    <label for="name" >Тема: <%- post['title'] %></label> 
+    
     <br/>
-    <label for="text" >Текст: какойто текст</label> 
-
+    <label for="text" >какойто текст</label> 
+    <label for="text"><b>By <span style="color:red;font-weight:bold"><%- post['author'] %></span></b> </label>
+    
     <h3>Leave comments</h3>  
     <div class="form-group">
       <label for="name">Author</label>

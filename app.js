@@ -185,8 +185,9 @@ app.post('/new_post', function (req, res) {
    })
    
    app.get('/login', function (req, res) {
-    res.render('login', {activePage: "login", error: ""})
-   })
+  
+    res.render('login', {activePage: "login", error: "", })
+  })
    
    app.post('/login', function (req, res) {
     var sql = "SELECT * FROM users WHERE email = ?"
@@ -199,7 +200,7 @@ app.post('/new_post', function (req, res) {
       if (row === undefined) {
         error = "Wrong email or password"
       }
-      if (error !== "") {
+      if (error !== "") { //что это значит
         res.render('login', {activePage: "login", error: error})
         return
       }
@@ -211,7 +212,12 @@ app.post('/new_post', function (req, res) {
         }
         req.session.userId = row["id"]
         req.session.loggedIn = true
-        res.redirect("/")
+        //req.session.userName = row["name"]
+        let Name = "/posts/:" + row["name"];
+        //Author = row["name"];
+        //res.render('posts', {activePage: "posts", error: error, Author: Author})
+        //console.log(Name);
+        res.redirect(Name);
       });
    
     })
