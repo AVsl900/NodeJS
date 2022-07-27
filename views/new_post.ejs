@@ -24,6 +24,7 @@
     <div class="jumbotron">
      
     <form method="post" action="/new_post">
+      <% if (typeof currentUser !== "undefined") {%>
 
   <!-- <div id="a1"> -->
     <div class="form-group">
@@ -33,9 +34,8 @@
 
     <div class="form-group">
       <label for="name">Author</label>
-      <input type="text" readonly name="author" class="form-control" id="author" placeholder="Имя" required>
+      <input type="text" value = "<%- currentUser.name %>" readonly name="author" class="form-control" id="author" placeholder="Имя">
     </div>
-  <!-- </div> -->
     
     <div class="form-group">
         <label for="message">Body</label>
@@ -43,6 +43,9 @@
     </div>
     <br/>
     <button type="submit" class="btn btn-primary">Send</button>
+    <% ;} else { %>
+      <h2>Sorry. Yor must Login</h2>
+    <% ;} %>
     </form>
     </div> 
 </div>
