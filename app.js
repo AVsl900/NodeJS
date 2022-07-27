@@ -188,6 +188,7 @@ app.post('/new_post', function (req, res) {
    app.get('/login', function (req, res) {
   
     res.render('login', {activePage: "login", error: "", })
+    
   })
    
    app.post('/login', function (req, res) {
@@ -225,7 +226,7 @@ app.post('/new_post', function (req, res) {
    })
    
    function setCurrentUser(req, res, next) {
-    //console.log("setCurrentUser");
+    
     if (req.session.loggedIn) {
       var sql = "SELECT * FROM users WHERE id = ?"
       var params = [req.session.userId]
@@ -233,6 +234,7 @@ app.post('/new_post', function (req, res) {
         if (row !== undefined) {
           res.locals.currentUser = row
         }
+        //console.log(res.locals.currentUser);
         return next()
       });
     } else {
@@ -271,7 +273,7 @@ app.post('/new_post', function (req, res) {
           return;
         }
       res.render('posts',   {activePage: "posts", posts: rows, flagSort: req.params.id});
-  
+      //console.log(res.locals.currentUser);
     });
   })
 

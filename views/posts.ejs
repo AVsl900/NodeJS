@@ -20,14 +20,10 @@
 
      <div class="jumbotron jumbotron-fluid">
 
-        <h2 style="text-align:left">Posts</h2>
+        <h2 style="text-align:left">Posts </h2>
 
-        <% if (flagSort=='')
-            ;
-          else if ( (flagSort=='author')||(flagSort=='title')||(flagSort=='id') ) {%>
-          <h6>Sort by  <%- flagSort %></h6> 
-       <%} else { %>
-          <h5>Yor name  <%- flagSort %></h5> <%}%>
+        <% if (typeof currentUser !== "undefined") {%>
+          <h5>Yor name  <%- currentUser.name %></h5> <% ;}%>
 
         <table class="table table-striped">
           <thead class="thead-dark">
