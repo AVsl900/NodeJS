@@ -57,6 +57,7 @@ app.get('/contact(s)?', function (req, res) {//адрес contact и contacts
 app.post('/contact', function (req, res) {
     res.render('contact_answer', {activePage: "contact", formData: req.body})
 })
+
 app.get('/posts', function (req, res) {
     var sql = "SELECT * FROM posts"
     db.all(sql, [], (err, rows) => {
@@ -65,7 +66,7 @@ app.get('/posts', function (req, res) {
           res.send("database error:" + err.message)
           return;
         }
-        res.render('posts',  {activePage: "posts", posts: rows })
+        res.render('posts',  {activePage: "posts", posts: rows, flagSort:"" })
       });
      })
 
@@ -213,7 +214,7 @@ app.post('/new_post', function (req, res) {
         req.session.userId = row["id"]
         req.session.loggedIn = true
         //req.session.userName = row["name"]
-        let Name = "/posts/:" + row["name"];
+        let Name = "/posts/" + row["name"];
         //Author = row["name"];
         //res.render('posts', {activePage: "posts", error: error, Author: Author})
         //console.log(Name);
@@ -273,6 +274,9 @@ app.post('/new_post', function (req, res) {
   
     });
   })
+
+
+
 
    app.listen(3000, function() {
     console.log('running on http://localhost:3000/');

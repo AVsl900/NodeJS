@@ -17,10 +17,18 @@
   
    <div class="container">
     <%- include("partials/navbar.ejs")%>
-    
+
      <div class="jumbotron jumbotron-fluid">
 
-        <h1 style="text-align:center">Posts</h1>
+        <h2 style="text-align:left">Posts</h2>
+
+        <% if (flagSort=='')
+            ;
+          else if ( (flagSort=='author')||(flagSort=='title')||(flagSort=='id') ) {%>
+          <h6>Sort by  <%- flagSort %></h6> 
+       <%} else { %>
+          <h5>Yor name  <%- flagSort %></h5> <%}%>
+
         <table class="table table-striped">
           <thead class="thead-dark">
             <tr>
@@ -65,13 +73,15 @@
           posts.forEach(function(post) {
             postCopy.push ({ id: post["id"], title: post["title"], author: post["author"] }) ;
           })
-
+          
           if (flagSort== 'author')
             postCopy.sort( compareA );
           else if (flagSort== 'title')
             postCopy.sort( compareT );
           else if (flagSort== 'id')
             postCopy.sort( compareD );
+
+           
           //console.log(postCopy) ;
           postCopy.forEach(function(post) {
             %>
