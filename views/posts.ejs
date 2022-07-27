@@ -39,15 +39,26 @@
           {return 1; }
         return 0;
       }
+      function compareD(a, b)
+      {
+        if (a.id < b.id)
+          {return -1;}
+        if (a.id > b.id)
+          {return 1; }
+        return 0;
+      }
+      
         %>
 
-        <%  include("../sort_funcs.js");  %>
-        
-
+        <%  //include("../sort_funcs.js"); 
+         //require (/sort_funcs.js);
+         //const compareA = require("../sort_funcs.js");
+        %>
+         
         <table class="table table-striped">
           <thead class="thead-dark">
             <tr>
-              <th scope="col">#</th>
+              <th scope="col">Namber</th>
               <th scope="col">Title</th>
               <th scope="col">Author</th>
               <th scope="col">Actions</th>
@@ -60,12 +71,14 @@
               
           posts.forEach(function(post) {
             postCopy.push ({ id: post["id"], title: post["title"], author: post["author"] }) ;
-         
           })
+
           if (flagSort== 'author')
             postCopy.sort( compareA );
           else if (flagSort== 'title')
             postCopy.sort( compareT );
+          else if (flagSort== 'id')
+            postCopy.sort( compareD );
           //console.log(postCopy) ;
           postCopy.forEach(function(post) {
             %>
@@ -87,8 +100,9 @@
         </table>
         <a href="/new_post" class="btn btn-success btn-sm">Create New Post</a>
 
-        <a href="/posts/author" class="btn btn-success btn-sm">Sort by author</a>
-        <a href="/posts/title" class="btn btn-success btn-sm">Sort by title</a>
+        <a href="/posts/author" class="btn btn-secondary btn-sm">Sort by author</a>
+        <a href="/posts/title" class="btn btn-secondary btn-sm">Sort by title</a>
+        <a href="/posts/id" class="btn btn-secondary btn-sm">Sort by data</a>
 
         <p>Total count: <%- posts.length %></p>
        
