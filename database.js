@@ -37,6 +37,19 @@ var db = new sqlite3.Database(DBSOURCE, (err) => {
                 console.log("Table users is created")
             }
         });
+    db.run(`CREATE TABLE coments (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        post_id integer,
+        author text,
+        comment text  
+        )`,
+        (err) => {
+            if (err) {
+                console.log("Table coments id already created:" + err.message)
+            }else{
+                console.log("Table coments is created")
+            }
+        });        
        
    }
 });
