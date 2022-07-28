@@ -88,8 +88,10 @@ app.post('/new_post', function (req, res) {
       return;
     }
     res.render('new_post_answer', {activePage: "new_post", formData: req.body})
+    console.log(req.body)
   });
  })
+
 
  app.get('/posts/:id/edit', function (req, res) {
     var sql = "SELECT * FROM posts WHERE id = ?"
@@ -174,19 +176,20 @@ app.post('/new_post', function (req, res) {
 
 
 app.post('/posts/:id/show', function (req, res) {
-    var data = [
-    req.body.post_id,
+    var data2 = [
+    req.body.postId,
     req.body.author,
     req.body.comment
   ]
-  var sql = "INSERT INTO coments (post_id, author, comment) VALUES (?,?,?)"
-  db.run(sql, data, function (err, result) {
+  var sql = "INSERT INTO coments (postId, author, comment) VALUES (?,?,?)"
+  db.run(sql, data2, function (err, result) {
     if (err) {
       res.status(400)
       res.send("database error:" + err.message)
       return;
     }
-    res.render('show_post', {activePage: "posts", formData: req.body})
+    res.render('show_post', {activePage: "posts", formData1: req.body})
+    console.log(req.body)
   });
  })
    
