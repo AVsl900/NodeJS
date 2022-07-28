@@ -84,12 +84,18 @@
             %>
             <tr>
               <td><%- post["id"] %></td>
-              <td><%- 1post["title"] %></td>
+              <td><%- post["title"] %></td>
               <td><%- post["author"] %></td>
               <td>
                 <a href="/posts/<%- post['id'] %>/show" class="btn btn-primary btn-sm">Show</a>
-                <a href="/posts/<%- post['id'] %>/edit" class="btn btn-success btn-sm">Edit</a>
-                <a href="/posts/<%- post['id'] %>/delete" class="btn btn-danger btn-sm">Delete</a>
+                <% if ((typeof currentUser == "undefined")|| (currentUser.name !== post["author"])) {%>
+                  <a href="/posts/<%- post['id'] %>/edit" class="btn btn-success btn-sm disabled"  >Edit</a>
+                  <a href="/posts/<%- post['id'] %>/delete" class="btn btn-danger btn-sm disabled"  >Delete</a> 
+                <% ;} else {%>
+                <a href="/posts/<%- post['id'] %>/edit" class="btn btn-success btn-sm "  >Edit</a>
+                <a href="/posts/<%- post['id'] %>/delete" class="btn btn-danger btn-sm "  >Delete</a>
+                <% ;}%>
+
               </td>
             </tr>
 
