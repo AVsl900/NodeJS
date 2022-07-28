@@ -18,8 +18,14 @@
        <h1 class="display-4">My blog</h1>
        <p class="lead">Use: Node Js, Bootstrap, Sqlite 3 </p>
        <hr class="my-4">
-       <p>To add new posts, please login.</p>
-       <a class="btn btn-primary btn-lg" href="/login" role="button">Login</a>
+       <% if (typeof currentUser == "undefined") {%> 
+        <p>To add new posts, please login.</p>
+        <a class="btn btn-primary btn-lg" href="/login" role="button">Login</a>
+      <% ;} else { %>
+      <h5>Yor name is <%- currentUser.name %></h5> 
+      <a class="btn btn-primary btn-lg" href="/logout" role="button">Logout</a>
+      <% ;} %>
+       
      </div>
    </div>
  
