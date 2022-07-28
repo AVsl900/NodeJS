@@ -84,7 +84,7 @@
             %>
             <tr>
               <td><%- post["id"] %></td>
-              <td><%- post["title"] %></td>
+              <td><%- 1post["title"] %></td>
               <td><%- post["author"] %></td>
               <td>
                 <a href="/posts/<%- post['id'] %>/show" class="btn btn-primary btn-sm">Show</a>
@@ -105,19 +105,10 @@
         <a href="/posts/id" class="btn btn-secondary btn-sm">Sort by data</a>
 
         <p>Total count: <%- posts.length %></p>
-       
-        <ul>
-          <% //obj.paragraphs.forEach(function(item) { %>
-          <li><%= //item %></li>
-        <%// }); %>
-        </ul>
   
    
      </div>
    </div>
-
-   
-
 
    <!-- JavaScript -->
    <script src="/jquery/jquery.min.js"></script>
