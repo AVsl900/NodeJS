@@ -70,10 +70,6 @@ app.get('/posts', function (req, res) {
       });
      })
 
-  //app.use('/posts', function (req, res) {
-  //    res.render('sort');
-  //  })
-
 app.get('/new_post', function (req, res) {
     res.render('new_post', {activePage: "new_post"})
     })
@@ -145,18 +141,55 @@ app.post('/new_post', function (req, res) {
     });
    })
    
+   
    app.get('/posts/:id/show', function (req, res) {
-    var sql = "SELECT * FROM posts WHERE id = ?"
+    var sqlP = "SELECT * FROM posts WHERE id = ?"
     var params = [req.params.id]
-    db.get(sql, params, (err, row) => {
+    db.get(sqlP, params, (err, row) => {
       if (err) {
         res.status(400)
         res.send("database error:" + err.message)
         return;
       }
-      res.render('show_post', {post: row, activePage: "posts"})
+      postP = row;
+      //res.render('show_post', {postP: postP, activePage: "posts"})
     });
-   })
+    //console.log(postP);
+    var sqlC = "SELECT * FROM coments"
+    db.all(sqlC, [], (err, rows) => {
+        if (err) {
+          res.status(400)
+          res.send("database error:" + err.message)
+          return;
+          
+        }
+      postC = rows;
+      console.log(postP);
+      console.log(postC);
+      // нет гарантии что успеют прийти все данные из первой таблицы
+      res.render('show_post',  {postP:postP, postC:postC, activePage: "posts" })
+      });
+   
+     })
+
+
+app.post('/posts/:id/show', function (req, res) {
+    var data = [
+    req.body.post_id,
+    req.body.author,
+    req.body.comment
+  ]
+  var sql = "INSERT INTO coments (post_id, author, comment) VALUES (?,?,?)"
+  db.run(sql, data, function (err, result) {
+    if (err) {
+      res.status(400)
+      res.send("database error:" + err.message)
+      return;
+    }
+    res.render('show_post', {activePage: "posts", formData: req.body})
+  });
+ })
+   
 
    app.get('/register', function (req, res) {
     res.render('register', {activePage: "register"})

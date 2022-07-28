@@ -23,15 +23,15 @@
     <%- include("partials/navbar.ejs") %>
     <div class="jumbotron">
 
-    <form method="post" action="/posts/<%- post['id'] %>/show">
+    <form method="postP" action="/posts/<%- postP['id'] %>/show">
 <!-- <div id="a1"> -->
-      <label for="name" ><%- post['title'] %>, </label> 
+      <label for="name" ><%- postP['title'] %>, </label> 
 
-      <label for="text"> <b>By <span style="color:red;font-weight:bold"><%- post['author'] %></span> </b></label>
+      <label for="text"> <b>By <span style="color:red;font-weight:bold"><%- postP['author'] %></span> </b></label>
  <!-- </div> -->
     <div class="form-group">
         <label for="message"></label>
-        <textarea readonly name="body" class="form-control" id="body" rows="3" required><%- post['body'] %></textarea>
+        <textarea readonly name="body" class="form-control" id="body" rows="3" required><%- postP['body'] %></textarea>
     </div>
   </form>
 
@@ -39,7 +39,7 @@
     
     <br/>
     <label for="text" >какойто текст</label> 
-    <label for="text"><b> By <span style="color:red"><%- post['author'] %></span></b> </label>
+    <label for="text"><b> By <span style="color:red"><%- postP['author'] %></span></b> </label>
     
     <h3>Leave comments</h3>  
     <div class="form-group">
