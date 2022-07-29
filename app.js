@@ -167,9 +167,10 @@ app.post('/new_post', function (req, res) {
         }
       postC = rows;
       //console.log(postP);
-      console.log(postC);
+      //console.log(postC);
       // нет гарантии что успеют прийти все данные из первой таблицы
       res.render('show_post',  {postP:postP, postC:postC, activePage: "posts" })
+      //res.redirect('/posts')
       });
    
      })
@@ -189,8 +190,9 @@ app.post('/posts/:id/show', function (req, res) {
       return;
     }
     res.render('show_post', {activePage: "posts", formData1: req.body})
-    console.log(req.body)
+    //res.redirect('/posts');
   });
+  res.redirect('/posts');
  })
    
 
