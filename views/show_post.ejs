@@ -21,6 +21,18 @@
   visibility: hidden;
   font-size: 1px;
       }
+    #a3 {
+      /*font-size: 20px; */
+      
+    }
+    
+    .new-input{
+        color: rgb(0, 81, 0);
+        font-size: 15px;
+        /*height: 34px;*/
+        line-height: 1;
+    
+    }
   </style>
 
 <div class="container">
@@ -30,42 +42,45 @@
     <form method="postP" action="/posts/<%- postP['id'] %>/show">
 <!-- <div id="a1"> -->
       <label for="name" > № <%-postP['id']%>: <%- postP['title'] %> , </label> 
-
-      <label for="text"> <b>By <span style="color:red;font-weight:bold"><%- postP['author'] %></span> </b></label>
+      <label for="text"> <b>By <span style="color:red;"><%- postP['author'] %></span> </b></label>
  <!-- </div> -->
+ 
     <div class="form-group">
         <label for="message"></label>
-        <textarea readonly name="body" class="form-control" id="body" rows="3" required><%- postP['body'] %></textarea>
+        <textarea readonly name="body" class="form-control new-input" id="body" rows="3" required><%- postP['body'] %></textarea>
     </div>
   </form>
 
-    <h3>Comments</h3> 
+    <h4>Comments</h4> 
     <% postC.forEach(function(post) { 
       if (post["postId"] === postP['id']) {%>
       <td> №<%- post["id"]%>:  <%- post["comment"] %><b>  By </b></td>
-      <td><span style="color:blue"> <%- post["author"] %></span>   |   </td> 
+      <td><b><span style="color:blue"> <%- post["author"] %></span></b>  |   </td> 
     <% }}) %>
     
     <form method="post" action="/posts/:id/show">
      <!-- <label for="postId">postId</label>-->
     <input class="a2" type="text" size="1" readonly name="postId"  id="postId" value="<%- postP['id'] %>">
     
-    <h3>Leave comments</h3> 
+    <h5>Leave comment</h5> 
+    <div id="a3">
+
     <div class="form-group">
       <label for="name">Author</label>
       <% if (typeof currentUser !== "undefined") {%>
-      <input type="text" readonly name="author" class="form-control" id="author"  value="<%- currentUser.name %>"required>
+      <input type="text" readonly name="author" class="form-control " id="author"  value="<%- currentUser.name %>"required>
       <% ; } else { %>
         <input type="text" name="author" class="form-control" id="author"  value=""required>
       <% ;} %>
     </div>
     <div class="form-group">
         <label for="message">Body</label>
-        <textarea name="comment" class="form-control" id="comment" rows="5" required> </textarea>
+        <textarea name="comment" class="form-control" id="comment" rows="2" required> </textarea>
     </div>
 
     <br/>
     <button type="submit" class="btn btn-primary">Send</button>
+  </div>
   </form>
 </div> 
 </div>
