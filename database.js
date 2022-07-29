@@ -39,7 +39,7 @@ var db = new sqlite3.Database(DBSOURCE, (err) => {
         });
     db.run(`CREATE TABLE coments (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        postId text,
+        postId INTEGER,
         author text,
         comment text  
         )`,

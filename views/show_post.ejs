@@ -19,6 +19,7 @@
     }
    input.a2 {
   visibility: hidden;
+  font-size: 1px;
       }
   </style>
 
@@ -28,7 +29,7 @@
 
     <form method="postP" action="/posts/<%- postP['id'] %>/show">
 <!-- <div id="a1"> -->
-      <label for="name" ><%- postP['title'] %>, </label> 
+      <label for="name" > № <%-postP['id']%>: <%- postP['title'] %> , </label> 
 
       <label for="text"> <b>By <span style="color:red;font-weight:bold"><%- postP['author'] %></span> </b></label>
  <!-- </div> -->
@@ -39,10 +40,11 @@
   </form>
 
     <h3>Comments</h3> 
-    
-    <br/>
-    <label for="text" >какойто текст</label> 
-    <label for="text"><b> By <span style="color:red"><%- postP['author'] %></span></b> </label>
+    <% postC.forEach(function(post) { 
+      if (post["postId"] === postP['id']) {%>
+      <td> №<%- post["id"]%>:  <%- post["comment"] %><b>  By </b></td>
+      <td><span style="color:blue"> <%- post["author"] %></span>   |   </td> 
+    <% }}) %>
     
     <form method="post" action="/posts/:id/show">
      <!-- <label for="postId">postId</label>-->
@@ -51,7 +53,7 @@
     <h3>Leave comments</h3> 
     <div class="form-group">
       <label for="name">Author</label>
-      <input type="text" readonly name="author" class="form-control" id="author"  value="<%- postP['author'] %>"required>
+      <input type="text" readonly name="author" class="form-control" id="author"  value="<%- currentUser.name %>"required>
     </div>
     <div class="form-group">
         <label for="message">Body</label>

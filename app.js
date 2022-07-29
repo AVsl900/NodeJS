@@ -166,7 +166,7 @@ app.post('/new_post', function (req, res) {
           
         }
       postC = rows;
-      console.log(postP);
+      //console.log(postP);
       console.log(postC);
       // нет гарантии что успеют прийти все данные из первой таблицы
       res.render('show_post',  {postP:postP, postC:postC, activePage: "posts" })
