@@ -147,6 +147,7 @@ app.post('/new_post', function (req, res) {
    app.get('/posts/:id/show', function (req, res) {
     var sqlP = "SELECT * FROM posts WHERE id = ?"
     var params = [req.params.id]
+    var sqlC = "SELECT * FROM coments"
     db.get(sqlP, params, (err, row) => {
       if (err) {
         res.status(400)
@@ -155,25 +156,20 @@ app.post('/new_post', function (req, res) {
       }
       postP = row;
       //res.render('show_post', {postP: postP, activePage: "posts"})
-    });
-    //console.log(postP);
-    var sqlC = "SELECT * FROM coments"
-    db.all(sqlC, [], (err, rows) => {
+      db.all(sqlC, [], (err, rows) => { //чтение БД coments вложено в posts
         if (err) {
           res.status(400)
           res.send("database error:" + err.message)
-          return;
-          
+          return;    
         }
       postC = rows;
       //console.log(postP);
       //console.log(postC);
       // нет гарантии что успеют прийти все данные из первой таблицы
       res.render('show_post',  {postP:postP, postC:postC, activePage: "posts" })
-      //res.redirect('/posts')
       });
-   
-     })
+    });
+ })
 
 
 app.post('/posts/:id/show', function (req, res) {
