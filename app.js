@@ -74,14 +74,18 @@ app.get('/posts', function (req, res) {
 
      app.get('/search_posts', function (req, res) {
       var sql = "SELECT * FROM posts"
+      let Search =req.url;
       db.all(sql, [], (err, rows) => {
           if (err) {
             res.status(400)
             res.send("database error:" + err.message)
             return;
           }
-          res.render('posts',  {activePage: "posts", posts: rows, flagSort:"" })
+          res.render('posts',  {activePage: "posts", posts: rows, flagSort: "", Search:Search })
+          //console.log(req.url)
+          console.log(Search)
         });
+        
        })
 
 
@@ -103,7 +107,7 @@ app.post('/new_post', function (req, res) {
       return;
     }
     res.render('new_post_answer', {activePage: "new_post", formData: req.body})
-    console.log(req.body)
+    //console.log(req.body)
   });
  })
 
