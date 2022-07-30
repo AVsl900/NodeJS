@@ -209,10 +209,35 @@ app.post('/posts/:id/show', function (req, res) {
       res.send("database error:" + err.message)
       return;
     }
-    res.render('show_post', {activePage: "posts", formData1: req.body})
-    //res.redirect('/posts');
+    //res.render('show_post', {activePage: "posts" })
   });
-  res.redirect('/posts');
+// дублируем из get
+/*
+var sqlP = "SELECT * FROM posts WHERE id = ?"
+    var params = [req.params.id]
+    var sqlC = "SELECT * FROM coments"
+    db.get(sqlP, params, (err, row) => {
+      if (err) {
+        res.status(400)
+        res.send("database error:" + err.message)
+        return;
+      }
+      postP = row;
+      //res.render('show_post', {postP: postP, activePage: "posts"})
+      db.all(sqlC, [], (err, rows) => { //чтение БД coments вложено в posts
+        if (err) {
+          res.status(400)
+          res.send("database error:" + err.message)
+          return;    
+        }
+      postC = rows;
+      //console.log(postP);
+      //console.log(postC);
+      // нет гарантии что успеют прийти все данные из первой таблицы
+      res.render('show_post',  {postP:postP, postC:postC, activePage: "posts" })
+      });
+    });
+    */
  })
    
 

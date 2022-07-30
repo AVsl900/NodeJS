@@ -39,7 +39,7 @@
     <%- include("partials/navbar.ejs") %>
     <div class="jumbotron">
 
-    <form method="postP" action="/posts/<%- postP['id'] %>/show">
+    <form method="post" action="/posts/<%- postP['id'] %>/show">
 <!-- <div id="a1"> -->
       <label for="name" > № <%-postP['id']%>: <%- postP['title'] %> , </label> 
       <label for="text"> <b>By <span style="color:red;"><%- postP['author'] %></span> </b></label>
@@ -80,9 +80,21 @@
     </div>
 
     <br/>
-    <button type="submit" class="btn btn-primary">Send</button>
+    <!-- Перезагрузка страниы четрез 1 сек по 2й функции после нажатия -->
+    <button type="submit" class="btn btn-primary" onclick="reload()">Send</button>
   </div>
   </form>
+
+  <script>
+    function reload(time=1000){
+      setTimeout(function(){
+        location.reload();
+      }, time);
+    }
+    </script>
+
+  
+
 </div> 
 </div>
 <!-- JavaScript -->
