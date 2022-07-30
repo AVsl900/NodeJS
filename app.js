@@ -74,16 +74,20 @@ app.get('/posts', function (req, res) {
 
      app.get('/search_posts', function (req, res) {
       var sql = "SELECT * FROM posts"
-      let Search =req.url;
+      var urlib=require('url');
+      var arr=urlib.parse(req.url,true)
+      //var url = arr.pathname // имя пути
+      var Get = arr.query // Сбор данных
+      //console.log(url,GET)// /NP {user:'xxx',pwd:'xxxxx'}
       db.all(sql, [], (err, rows) => {
           if (err) {
             res.status(400)
             res.send("database error:" + err.message)
             return;
           }
-          res.render('posts',  {activePage: "posts", posts: rows, flagSort: "", Search:Search })
+          res.render('posts',  {activePage: "posts", posts: rows, flagSort: "", Get:Get })
           //console.log(req.url)
-          console.log(Search)
+          console.log(Get.search)
         });
         
        })
