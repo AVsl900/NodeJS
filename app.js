@@ -12,6 +12,8 @@ const db = require("./database.js")
 const bcrypt = require('bcrypt')
 const session = require('express-session')
 
+app.use('/static', express.static(__dirname + '/public'));
+
 app.use(session({
  secret: 'randomly generated secret',
 }))
