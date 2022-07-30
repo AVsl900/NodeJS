@@ -68,17 +68,19 @@ app.get('/posts', function (req, res) {
           res.send("database error:" + err.message)
           return;
         }
-        res.render('posts',  {activePage: "posts", posts: rows, flagSort:"" })
+        res.render('posts',  {activePage: "posts", posts: rows, flagSort:"", Get:""})
       });
      })
 
      app.get('/search_posts', function (req, res) {
-      var sql = "SELECT * FROM posts"
+  
       var urlib=require('url');
       var arr=urlib.parse(req.url,true)
       //var url = arr.pathname // имя пути
       var Get = arr.query // Сбор данных
       //console.log(url,GET)// /NP {user:'xxx',pwd:'xxxxx'}
+      let s = "%" + Get.search + "%";
+      var sql = "SELECT * FROM posts WHERE title like" + "'" + s + "'";
       db.all(sql, [], (err, rows) => {
           if (err) {
             res.status(400)
@@ -86,8 +88,6 @@ app.get('/posts', function (req, res) {
             return;
           }
           res.render('posts',  {activePage: "posts", posts: rows, flagSort: "", Get:Get })
-          //console.log(req.url)
-          console.log(Get.search)
         });
         
        })
@@ -323,7 +323,7 @@ app.post('/posts/:id/show', function (req, res) {
           res.send("database error:" + err.message)
           return;
         }
-      res.render('posts',   {activePage: "posts", posts: rows, flagSort: req.params.id});
+      res.render('posts',   {activePage: "posts", posts: rows, flagSort: req.params.id, Get:""});
       //console.log(res.locals.currentUser);
     });
   })
