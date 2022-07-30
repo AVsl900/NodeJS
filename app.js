@@ -72,6 +72,19 @@ app.get('/posts', function (req, res) {
       });
      })
 
+     app.get('/search_posts', function (req, res) {
+      var sql = "SELECT * FROM posts"
+      db.all(sql, [], (err, rows) => {
+          if (err) {
+            res.status(400)
+            res.send("database error:" + err.message)
+            return;
+          }
+          res.render('posts',  {activePage: "posts", posts: rows, flagSort:"" })
+        });
+       })
+
+
 app.get('/new_post', function (req, res) {
     res.render('new_post', {activePage: "new_post"})
     })
@@ -295,7 +308,6 @@ app.post('/posts/:id/show', function (req, res) {
    }
   
     app.get('/posts/:id', function(req, res){
-      //let obj = { title:'Новость', id: 4, paragraphs:['Параграф', 'Обычный текст', 'Числа: 3, 7, 24', 476]};
       var sql = "SELECT * FROM posts"
     db.all(sql, [], (err, rows) => {
         if (err) {

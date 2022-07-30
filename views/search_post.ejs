@@ -58,7 +58,7 @@ form.example::after {
     <%- include("partials/navbar.ejs")%>
 
 
-    <form class="example" action="/search_posts">
+    <form class="example" action="/search_post">
       <input type="text" placeholder="Search for Title.." name="search">
       <button type="submit"><i class="fa fa-search"></i></button>
     </form>
@@ -82,7 +82,6 @@ form.example::after {
           </thead>
           <tbody>
             
-            <%- //include("sort_funcs.ejs"); %>
             <%
             function compareT(a, b)
             {
@@ -91,22 +90,6 @@ form.example::after {
             if (a.title > b.title)
             return 1;
             }
-            function compareA(a, b)
-            {
-              if (a.author < b.author)
-                {return -1;}
-              if (a.author > b.author)
-                {return 1; }
-              return 0;
-            }
-            function compareD(a, b)
-                  {
-                    if (a.id < b.id)
-                      {return -1;}
-                    if (a.id > b.id)
-                      {return 1; }
-                    return 0;
-                  }
             %>
             
           <% 
@@ -115,16 +98,8 @@ form.example::after {
           posts.forEach(function(post) {
             postCopy.push ({ id: post["id"], title: post["title"], author: post["author"] }) ;
           })
-          
-          if (flagSort== 'author')
-            postCopy.sort( compareA );
-          else if (flagSort== 'title')
-            postCopy.sort( compareT );
-          else if (flagSort== 'id')
-            postCopy.sort( compareD );
 
-           
-          //console.log(postCopy) ;
+          postCopy.sort( compareT );
           postCopy.forEach(function(post) {
             %>
             <tr>
@@ -140,7 +115,6 @@ form.example::after {
                 <a href="/posts/<%- post['id'] %>/edit" class="btn btn-success btn-sm "  >Edit</a>
                 <a href="/posts/<%- post['id'] %>/delete" class="btn btn-danger btn-sm "  >Delete</a>
                 <% ;}%>
-
               </td>
             </tr>
 
@@ -149,6 +123,7 @@ form.example::after {
           %>
           </tbody>
         </table>
+        <!--
         <a href="/new_post" class="btn btn-success btn-sm">Create New Post</a>
 
         <a href="/posts/author" class="btn btn-secondary btn-sm">Sort by author</a>
@@ -156,7 +131,7 @@ form.example::after {
         <a href="/posts/id" class="btn btn-secondary btn-sm">Sort by data</a>
 
         <p>Total count: <%- posts.length %></p>
-  
+  -->
    
      </div>
    </div>
