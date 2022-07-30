@@ -55,8 +55,8 @@ form.example::after {
  <body>
   
    <div class="container">
-    <%- include("partials/navbar.ejs")%>
-
+    <%- include("partials/navbarPost.ejs")%>
+  
 
     <form class="example" action="/search_posts">
       <input type="text" placeholder="Search for Title.." name="search">
@@ -64,8 +64,12 @@ form.example::after {
     </form>
 
      <div class="jumbotron jumbotron-fluid">
-      <p> You search: <%- Get.search %> </p>
-        <h2 style="text-align:left">Posts </h2>
+
+      <% if ( Get !== "") {%>
+      <p> You search: <%- Get %> </p>
+      <% ;} %>
+
+        <h3 style="text-align:left">Posts </h3>
 
         <% if (typeof currentUser !== "undefined") {%>
           <h5>Yor name is <%- currentUser.name %></h5> 

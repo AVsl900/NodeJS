@@ -77,9 +77,10 @@ app.get('/posts', function (req, res) {
       var urlib=require('url');
       var arr=urlib.parse(req.url,true)
       //var url = arr.pathname // имя пути
-      var Get = arr.query // Сбор данных
+      var GetS = arr.query // Сбор данных
       //console.log(url,GET)// /NP {user:'xxx',pwd:'xxxxx'}
-      let s = "%" + Get.search + "%";
+      let s = "%" + GetS.search + "%";
+
       var sql = "SELECT * FROM posts WHERE title like" + "'" + s + "'";
       db.all(sql, [], (err, rows) => {
           if (err) {
@@ -87,7 +88,7 @@ app.get('/posts', function (req, res) {
             res.send("database error:" + err.message)
             return;
           }
-          res.render('posts',  {activePage: "posts", posts: rows, flagSort: "", Get:Get })
+          res.render('posts',  {activePage: "posts", posts: rows, flagSort: "", Get:GetS.search })
         });
         
        })
