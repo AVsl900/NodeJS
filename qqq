@@ -1,0 +1,2 @@
+http://localhost:3000/search_posts?search=<script>console.log(!!!);</script>
+.php?q=<script>DoSomething();</script>

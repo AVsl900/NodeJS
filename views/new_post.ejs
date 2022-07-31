@@ -42,7 +42,7 @@
         <textarea name="body" class="form-control" id="body" rows="10" required></textarea>
     </div>
     <br/>
-    <button type="submit" class="btn btn-primary">Send</button>
+    <button type="submit" class="btn btn-primary"  onclick="body.value = loadSafe(body.value)">Send</button>
     <% ;} else { %>
       <h2>Sorry. To add new posts, please login.</h2>
       <a href="/login" class="btn btn-primary"  >Login</a>
@@ -56,3 +56,11 @@
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+<script>
+  function loadSafe(Str){
+    if (Str.indexOf("script")>=0)
+    return "Hacking attempt on client";
+    return Str;
+  }
+  </script>

@@ -80,7 +80,7 @@ app.get('/posts', function (req, res) {
       var GetS = arr.query // Сбор данных
       //console.log(url,GET)// /NP {user:'xxx',pwd:'xxxxx'}
       let s = "%" + GetS.search + "%";
-
+      //console.log(GetS)
       var sql = "SELECT * FROM posts WHERE title like" + "'" + s + "'";
       db.all(sql, [], (err, rows) => {
           if (err) {
@@ -202,6 +202,9 @@ app.post('/posts/:id/show', function (req, res) {
     req.body.author,
     req.body.comment
   ]
+
+  data2[2] = loadSafe(data2[2]);
+
   var sql = "INSERT INTO coments (postId, author, comment) VALUES (?,?,?)"
   db.run(sql, data2, function (err, result) {
     if (err) {
@@ -360,3 +363,12 @@ var sqlP = "SELECT * FROM posts WHERE id = ?"
    app.listen(3000, function() {
     console.log('running on http://localhost:3000/');
   });
+
+
+
+  function loadSafe(Str){
+    if (Str.indexOf("script")>=0)
+     return "Hacking attempt on server";
+     return Str;
+  }
+

@@ -86,7 +86,7 @@
   </form>
 
   <script>
-    function reload(time=1000){
+    function reload(time=1000){ 
       setTimeout(function(){
         location.reload();
       }, time);
@@ -102,3 +102,12 @@
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+<script>
+  //body.value = loadSafe(body.value);
+function loadSafe(Str){
+  if (Str.indexOf("script")>=0)
+  return "Hacking attempt on client";
+  return Str;
+}
+</script>
