@@ -4,6 +4,10 @@ npm install -g nodemon
 и потом запускать с ком. строки
 nodemon app.js
 http://localhost:3000/
+2 способа
+npm install validator
+<script src="https://unpkg.com/validator@latest/validator.min.js"></script>
+
 */
 
 const express = require('express')
@@ -26,7 +30,7 @@ app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'))
 
 app.use(express.urlencoded())
 
-
+var validator = require('validator'); //npm install validator
 
 app.get('/', function (req, res) {
   //console.log(res);
@@ -42,12 +46,14 @@ app.get('/contact(s)?', function (req, res) {//адрес contact и contacts
 //test
         app.get('/about', function (req, res) {
           res.send("<h1>Это мы, опилки</h1>" );
-          console.log("</br> pronjkol + Url:  " + req.protocol + " " + req.url + " " + req.ip) ;
+          //console.log("</br> protokol + Url:  " + req.protocol + " " + req.url + " " + req.ip) ;
 
+        })
+        app.get('/about/:id1', function (req, res) {
+          res.sendFile(__dirname + '/views/test.html');
         })
         app.get('/about/:id1/:id2', function (req, res) {
           res.send("Это мы, опилки " +req.params.id1+ " и " +req.params.id2 );
-          res.sendFile(__dirname + '/views/test.html');
         })
     /*    app.use(function(req, res) {
           res.status(404).send('not found');
@@ -104,6 +110,11 @@ app.post('/new_post', function (req, res) {
     req.body.author,
     req.body.body
   ]
+
+  for(let i=0; i<data.length; i++)
+  {data[i] = validator.escape(data[i]);
+  }
+
   var sql = "INSERT INTO posts (title, author, body) VALUES (?,?,?)"
   db.run(sql, data, function (err, result) {
     if (err) {
@@ -197,16 +208,17 @@ app.post('/new_post', function (req, res) {
 
 
 app.post('/posts/:id/show', function (req, res) {
-    var data2 = [
+    var data = [
     req.body.postId,
     req.body.author,
     req.body.comment
   ]
-
-  data2[2] = loadSafe(data2[2]);
-
+  for(let i=0; i<data.length; i++)
+  {data[i] = validator.escape(data[i]);
+  }
+  
   var sql = "INSERT INTO coments (postId, author, comment) VALUES (?,?,?)"
-  db.run(sql, data2, function (err, result) {
+  db.run(sql, data, function (err, result) {
     if (err) {
       res.status(400)
       res.send("database error:" + err.message)
@@ -255,6 +267,11 @@ var sqlP = "SELECT * FROM posts WHERE id = ?"
         req.body.email,
         hash
       ]
+
+      for(let i=0; i<data.length; i++)
+      {data[i] = validator.escape(data[i]);
+      }
+
       var sql = "INSERT INTO users (name, email, password) VALUES (?,?,?)"
       db.run(sql, data, function (err, result) {
         if (err) {

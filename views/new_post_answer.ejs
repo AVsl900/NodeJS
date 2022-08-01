@@ -18,10 +18,9 @@
 <div class="alert alert-success" role="alert">
     New post is created!
 </div>
-<p>Title: <%- formData.title %></p>
-<p>Author: <%- formData.author %></p>
-<p>Body: <%- formData.body %></p>
-<a href="/posts">See all posts</a>
+<p><%- formData.title %> </b>by <span style="color:red;"><%- formData.author %></span> </b> write: </p>
+<p><%- formData.body %></p>
+<a href="/posts" class="btn btn-primary">See all posts</a>
 
 
     </div> 
