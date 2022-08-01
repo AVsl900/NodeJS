@@ -39,33 +39,30 @@
     <%- include("partials/navbar.ejs") %>
     <div class="jumbotron">
 
-    <form method="post" action="/posts/<%- postP['id'] %>/show">
 <!-- <div id="a1"> -->
-      <label for="name" > № <%-postP['id']%>: <%- postP['title'] %> , </label> 
-      <label for="text"> <b>By <span style="color:red;"><%- postP['author'] %></span> </b></label>
+      <label for="name" > № <%-postP.id%>: <%- postP.title %> , </label> 
+      <label for="text"> <b>By <span style="color:red;"><%- postP.author %></span> </b></label>
  <!-- </div> -->
  
     <div class="form-group">
         <label for="message"></label>
         <textarea readonly name="body" class="form-control new-input" id="body" rows="3" required><%- postP['body'] %></textarea>
     </div>
-  </form>
 
     <h4>Comments</h4> 
     <% postC.forEach(function(post) { 
-      if (post["postId"] === postP['id']) {%>
+      if (post["postId"] === postP.id) {%>
       
       <td><b><span style="color:blue"> <%- post["author"] %></span>(<%- post["id"]%>) : </b> </td> 
-      <td> <%- post["comment"] %> | </td> <br/>
+      <td> <%- post["comment"] %></td> <br/>
     <% }}) %>
     
-    <form method="post" action="/posts/:id/show">
-     <!-- <label for="postId">postId</label>-->
+    <form method="post" action="/posts/<%- postP.id %>/show">
+      <!-- <label for="postId">postId</label>-->
     <input class="a2" type="text" size="1" readonly name="postId"  id="postId" value="<%- postP['id'] %>">
     
     <h5>Leave comment</h5> 
-    <div id="a3">
-
+    <div id="a3">    
     <div class="form-group">
       <label for="name">Author</label>
       <% if (typeof currentUser !== "undefined") {%>
@@ -80,8 +77,11 @@
     </div>
 
     <br/>
-    <!-- Перезагрузка страниы четрез 1 сек по 2й функции после нажатия -->
-    <button type="submit" class="btn btn-primary" onclick="reload()">Send</button>
+
+    <button type="submit" class="btn btn-primary">Send</button>
+    <!-- Перезагрузка страниы четрез 1 сек по 2й функции после нажатия
+      <button type="submit" class="btn btn-primary" onclick="reload()">Send</button> -->
+
   </div>
   </form>
 
@@ -93,8 +93,6 @@
     }
     </script>
 
-  
-
 </div> 
 </div>
 <!-- JavaScript -->
@@ -102,12 +100,3 @@
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-<script>
-  //body.value = loadSafe(body.value);
-function loadSafe(Str){
-  if (Str.indexOf("script")>=0)
-  return "Hacking attempt on client";
-  return Str;
-}
-</script>

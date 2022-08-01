@@ -39,7 +39,6 @@ app.get('/', function (req, res) {
 }) 
 app.get('/contact(s)?', function (req, res) {//адрес contact и contacts
   //let obj = { title:'Новость', id: 4, paragraphs:['Параграф', 'Обычный текст', 'Числа: 3, 7, 24', 476]};
-  //res.render('contact', {activePage: "contact", newsId: req.params.id, newParam: 535, obj: obj});
   res.render('contact', {activePage: "contact"});
 
 })
@@ -179,7 +178,7 @@ app.post('/new_post', function (req, res) {
    })
    
    
-   app.get('/posts/:id/show', function (req, res) {
+  app.get('/posts/:id/show', function (req, res) {
     var sqlP = "SELECT * FROM posts WHERE id = ?"
     var params = [req.params.id]
     var sqlC = "SELECT * FROM coments"
@@ -199,12 +198,12 @@ app.post('/new_post', function (req, res) {
         }
       postC = rows;
       //console.log(postP);
-      //console.log(postC);
+      console.log("from get id: "+ postP.id);
       // нет гарантии что успеют прийти все данные из первой таблицы
       res.render('show_post',  {postP:postP, postC:postC, activePage: "posts" })
       });
     });
- })
+  })
 
 
 app.post('/posts/:id/show', function (req, res) {
@@ -213,10 +212,11 @@ app.post('/posts/:id/show', function (req, res) {
     req.body.author,
     req.body.comment
   ]
+  console.log(req.body.postId); //это странно, как id стало postId ????? почему с ним нет проблем в get???
   for(let i=0; i<data.length; i++)
   {data[i] = validator.escape(data[i]);
   }
-  
+ 
   var sql = "INSERT INTO coments (postId, author, comment) VALUES (?,?,?)"
   db.run(sql, data, function (err, result) {
     if (err) {
@@ -224,36 +224,31 @@ app.post('/posts/:id/show', function (req, res) {
       res.send("database error:" + err.message)
       return;
     }
-    //res.render('show_post', {activePage: "posts" })
   });
-// дублируем из get
-/*
+
 var sqlP = "SELECT * FROM posts WHERE id = ?"
-    var params = [req.params.id]
-    var sqlC = "SELECT * FROM coments"
-    db.get(sqlP, params, (err, row) => {
-      if (err) {
-        res.status(400)
-        res.send("database error:" + err.message)
-        return;
-      }
-      postP = row;
-      //res.render('show_post', {postP: postP, activePage: "posts"})
-      db.all(sqlC, [], (err, rows) => { //чтение БД coments вложено в posts
-        if (err) {
-          res.status(400)
-          res.send("database error:" + err.message)
-          return;    
-        }
-      postC = rows;
-      //console.log(postP);
-      //console.log(postC);
-      // нет гарантии что успеют прийти все данные из первой таблицы
-      res.render('show_post',  {postP:postP, postC:postC, activePage: "posts" })
-      });
-    });
-    */
- })
+var params = [req.params.id]
+var sqlC = "SELECT * FROM coments"
+db.get(sqlP, params, (err, row) => {
+  if (err) {
+    res.status(400)
+    res.send("database error:" + err.message)
+    return;
+  }
+  postP = row;
+  db.all(sqlC, [], (err, rows) => { //чтение БД coments вложено в posts
+    if (err) {
+      res.status(400)
+      res.send("database error:" + err.message)
+      return;    
+    }
+  postC = rows;
+  console.log("from get id: "+ postP.id);
+  // нет гарантии что успеют прийти все данные из первой таблицы
+  res.render('show_post',  {postP:postP, postC:postC, activePage: "posts" })
+  });
+});
+})
    
 
    app.get('/register', function (req, res) {
@@ -289,9 +284,7 @@ var sqlP = "SELECT * FROM posts WHERE id = ?"
    })
    
    app.get('/login', function (req, res) {
-  
     res.render('login', {activePage: "login", error: "", })
-    
   })
    
    app.post('/login', function (req, res) {
@@ -324,7 +317,6 @@ var sqlP = "SELECT * FROM posts WHERE id = ?"
    })
    
    function setCurrentUser(req, res, next) {
-    
     if (req.session.loggedIn) {
       var sql = "SELECT * FROM users WHERE id = ?"
       var params = [req.session.userId]
@@ -332,15 +324,12 @@ var sqlP = "SELECT * FROM posts WHERE id = ?"
         if (row !== undefined) {
           res.locals.currentUser = row
         }
-        //console.log(res.locals.currentUser);
         return next()
       });
     } else {
       return next()
     }
    }
-
-   //function typeSort(sort){ return sort;}
  
    app.get('/logout', function (req, res) {
     req.session.userId = null
@@ -374,18 +363,6 @@ var sqlP = "SELECT * FROM posts WHERE id = ?"
     });
   })
 
-
-
-
    app.listen(3000, function() {
     console.log('running on http://localhost:3000/');
   });
-
-
-
-  function loadSafe(Str){
-    if (Str.indexOf("script")>=0)
-     return "Hacking attempt on server";
-     return Str;
-  }
-
