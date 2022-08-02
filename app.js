@@ -198,7 +198,6 @@ app.post('/new_post', function (req, res) {
         }
       postC = rows;
       //console.log(postP);
-      console.log("from get id: "+ postP.id);
       // нет гарантии что успеют прийти все данные из первой таблицы
       res.render('show_post',  {postP:postP, postC:postC, activePage: "posts" })
       });
@@ -243,7 +242,6 @@ db.get(sqlP, params, (err, row) => {
       return;    
     }
   postC = rows;
-  console.log("from get id: "+ postP.id);
   // нет гарантии что успеют прийти все данные из первой таблицы
   res.render('show_post',  {postP:postP, postC:postC, activePage: "posts" })
   });
