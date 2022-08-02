@@ -211,7 +211,6 @@ app.post('/posts/:id/show', function (req, res) {
     req.body.author,
     req.body.comment
   ]
-  console.log(req.body.postId); //это странно, как id стало postId ????? почему с ним нет проблем в get???
   for(let i=0; i<data.length; i++)
   {data[i] = validator.escape(data[i]);
   }
